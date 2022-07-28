@@ -8,12 +8,11 @@ const middlewares = require('./middlewares');
 const port = process.env.API_PORT || 3000;
 
 // não remova esse endpoint
+
 app.get('/', (_request, response) => {
   response.send();
 });
-
 app.post('/login', authController);
-
 app.use(middlewares.error);
 
 app.listen(port, () => console.log('ouvindo porta', port));
