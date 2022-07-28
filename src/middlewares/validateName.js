@@ -1,7 +1,10 @@
 const Joi = require('joi');
 
 const loginValidation = Joi.object({
-  email: Joi.string().required(),
+  displayName: Joi.string().required().min(8),
+  email: Joi.string().required().email(),
+  password: Joi.string().required().min(6),
+  image: Joi.string().required(),
 }).messages({
   'any.required': '{{#label}} is required',
 });

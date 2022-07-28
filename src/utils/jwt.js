@@ -7,7 +7,7 @@ const jwtConfig = {
 
 const SECRET = process.env.JWT_SECRET;
 
-const generateToken = ({ email, password }) => 
-jwt.sign({ email, password }, SECRET, jwtConfig);
+const generateToken = (data) => 
+jwt.sign({ ...data }, SECRET, jwtConfig);
 
 module.exports = generateToken;
