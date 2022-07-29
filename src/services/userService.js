@@ -8,6 +8,19 @@ const getAll = async () => {
   return rows;
 };
 
+const getUserById = async (id) => {
+  const row = await User.findByPk(id, {
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
+
+  if (!row) {
+    const error = { status: 404, message: 'User does not exist' };
+    throw error;
+  }
+
+  return row;
+};
+
 const createUser = async (displayName, email, password, image) => {  
   const user = await User.findOne({
     attributes: ['displayName', 'email', 'password', 'image'],
@@ -27,4 +40,5 @@ const createUser = async (displayName, email, password, image) => {
 module.exports = {
   createUser,
   getAll,
+  getUserById,
 };

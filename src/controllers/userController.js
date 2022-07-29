@@ -9,6 +9,16 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+const getUserById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const row = await userService.getUserById(id);
+    res.status(200).json(row);
+  } catch (error) {
+    next(error);    
+  }
+};
+
 const createUser = async (req, res, next) => {
   try {
     const { displayName, email, password, image } = req.body;
@@ -22,4 +32,5 @@ const createUser = async (req, res, next) => {
 module.exports = {
   createUser,
   getUsers,
+  getUserById,
 };
