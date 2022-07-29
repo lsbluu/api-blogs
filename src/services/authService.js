@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const generateToken = require('../utils/jwt');
+const { generateToken } = require('../utils/jwt');
 
 const authenticate = async (email, password) => {
 if (!email || !password) {
