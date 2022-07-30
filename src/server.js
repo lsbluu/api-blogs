@@ -1,6 +1,6 @@
 require('dotenv').config();
 const app = require('./api');
-const { createCategory } = require('./controllers/categoryController');
+const { createCategory, getCategory } = require('./controllers/categoryController');
 
 const { authController } = require('./controllers/loginController');
 const { createUser, getUsers, getUserById } = require('./controllers/userController');
@@ -19,6 +19,7 @@ app.get('/user', middlewares.authMiddleware, getUsers);
 app.get('/user/:id', middlewares.authMiddleware, getUserById);
 app.post('/user', middlewares.validate, createUser);
 app.post('/categories', middlewares.authMiddleware, middlewares.validateName, createCategory);
+app.get('/categories', middlewares.authMiddleware, getCategory);
 
 app.use(middlewares.error);
 
