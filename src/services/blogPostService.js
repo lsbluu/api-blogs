@@ -28,7 +28,6 @@ const getById = async (id) => {
 
 const deleteById = async (id, users) => {
   const result = await BlogPost.findByPk(id);
-  console.log(users.id);
 
   if (!result) {
     const erro = { status: 404, message: 'Post does not exist' };
@@ -36,7 +35,7 @@ const deleteById = async (id, users) => {
   }  
   
     if (result.dataValues.userId !== users.id) {
-      const erro = { status: 408, message: 'Unauthorized user' };
+      const erro = { status: 401, message: 'Unauthorized user' };
       throw erro;  
     }
 

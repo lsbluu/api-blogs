@@ -4,11 +4,11 @@ const {
   getBlogPost, 
   getByIdBlogPost, 
   updateByIdBlogPost, 
-  deleteBlogPost} = require('./controllers/blogPostController');
+  deleteBlogPost } = require('./controllers/blogPostController');
 const { createCategory, getCategory } = require('./controllers/categoryController');
 
 const { authController } = require('./controllers/loginController');
-const { createUser, getUsers, getUserById } = require('./controllers/userController');
+const { createUser, getUsers, getUserById, deleteMe } = require('./controllers/userController');
 const middlewares = require('./middlewares');
 
 // não remova a variável `API_PORT` ou o `listen`
@@ -23,6 +23,7 @@ app.post('/login', authController);
 app.get('/user', middlewares.authMiddleware, getUsers);
 app.get('/user/:id', middlewares.authMiddleware, getUserById);
 app.post('/user', middlewares.validate, createUser);
+app.delete('/user/me', middlewares.authMiddleware, deleteMe);
 app.post('/categories', middlewares.authMiddleware, middlewares.validateName, createCategory);
 app.get('/categories', middlewares.authMiddleware, getCategory);
 app.get('/post', middlewares.authMiddleware, getBlogPost);

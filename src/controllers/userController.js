@@ -29,8 +29,19 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const deleteMe = async (req, res, next) => {
+  try {
+     const users = res.locals.user;
+    await userService.deleteMe(users);
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createUser,
   getUsers,
   getUserById,
+  deleteMe,
 };
