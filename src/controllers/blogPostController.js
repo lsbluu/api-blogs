@@ -9,6 +9,16 @@ const getBlogPost = async (req, res, next) => {
   }
 };
 
+const getSearchBlog = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    const rows = await blogPostService.getSearch(q);
+    res.status(200).json(rows);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getByIdBlogPost = async (req, res, next) => {
  try {
   const { id } = req.params;
@@ -47,4 +57,5 @@ module.exports = {
   getByIdBlogPost,
   updateByIdBlogPost,
   deleteBlogPost,
+  getSearchBlog,
 };
