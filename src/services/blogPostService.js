@@ -19,11 +19,30 @@ const getById = async (id) => {
   });
 
   if (!row) {
-    const erro = { status: 404, message: 'Post does not exist' };
+    const erro = { status: 401, message: 'Post does not exist' };
     throw erro;
   }
 
   return row;
+};
+
+const deleteById = async (id, users) => {
+  const result = await BlogPost.findByPk(id);
+  console.log(users.id);
+
+  if (!result) {
+    const erro = { status: 404, message: 'Post does not exist' };
+    throw erro;
+  }  
+  
+    if (result.dataValues.userId !== users.id) {
+      const erro = { status: 408, message: 'Unauthorized user' };
+      throw erro;  
+    }
+
+      await BlogPost.destroy({
+        where: { id }, 
+});
 };
 
 const updateById = async (id, title, content, users) => {
@@ -53,4 +72,5 @@ module.exports = {
   get,
   getById,
   updateById,
+  deleteById,
 };

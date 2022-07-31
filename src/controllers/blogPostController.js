@@ -31,8 +31,20 @@ const updateByIdBlogPost = async (req, res, next) => {
   }
 };
 
+const deleteBlogPost = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+  const users = res.locals.user;
+  await blogPostService.deleteById(id, users);
+  res.status(204).end();
+  } catch (error) {    
+    next(error);
+  }
+};
+
 module.exports = {
   getBlogPost,
   getByIdBlogPost,
   updateByIdBlogPost,
+  deleteBlogPost,
 };
