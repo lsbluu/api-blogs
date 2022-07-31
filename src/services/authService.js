@@ -7,7 +7,7 @@ if (!email || !password) {
   throw erro;
 }
 const user = await User.findOne({
-  attributes: ['email', 'password'],
+  attributes: ['id', 'email', 'password'],
   where: { email, password },
 });
 

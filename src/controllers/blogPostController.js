@@ -19,7 +19,20 @@ const getByIdBlogPost = async (req, res, next) => {
  }
 };
 
+const updateByIdBlogPost = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+  const { title, content } = req.body;
+  const users = res.locals.user;
+  const result = await blogPostService.updateById(id, title, content, users);
+  res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getBlogPost,
   getByIdBlogPost,
+  updateByIdBlogPost,
 };
