@@ -37,7 +37,7 @@ const getById = async (id) => {
   });
 
   if (!row) {
-    const erro = { status: 401, message: 'Post does not exist' };
+    const erro = { status: 404, message: 'Post does not exist' };
     throw erro;
   }
 
