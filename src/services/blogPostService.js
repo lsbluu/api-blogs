@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 const { BlogPost, User, Category, PostCategory } = require('../database/models');
 
-const missing = { status: 400, message: 'Some required fields are missing' }
+const missing = { status: 400, message: 'Some required fields are missing' };
 const get = async () => {
   const rows = await BlogPost.findAll(
     { include: [
