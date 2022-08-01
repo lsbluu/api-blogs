@@ -29,6 +29,17 @@ const getByIdBlogPost = async (req, res, next) => {
  }
 };
 
+const createBlog = async (req, res, next) => {
+  try {
+    const { title, content, categoryIds } = req.body;
+    const { id } = res.locals.user;
+  const result = await blogPostService.add(title, content, id, categoryIds);
+  res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateByIdBlogPost = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -58,4 +69,5 @@ module.exports = {
   updateByIdBlogPost,
   deleteBlogPost,
   getSearchBlog,
+  createBlog,
 };

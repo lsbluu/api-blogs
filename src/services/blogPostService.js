@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
-const { BlogPost, User, Category } = require('../database/models');
+const { BlogPost, User, Category, PostCategory } = require('../database/models');
 
+const missing = { status: 400, message: 'Some required fields are missing' }
 const get = async () => {
   const rows = await BlogPost.findAll(
     { include: [
@@ -62,9 +63,30 @@ const deleteById = async (id, users) => {
 });
 };
 
+const add = async (title, content, userId, categoryIds) => {
+  if (!title || !content || !categoryIds) {
+    throw missing; 
+  }
+  const result = await BlogPost.create({ title, content, userId });
+  const postId = result.dataValues.id;
+  const category = await Promise.all(categoryIds.map(async (e) => {
+    const exist = await Category.findByPk(e);
+    if (!exist) return false;
+       return true;
+  }));  
+  const check = category.every((b) => b);
+  if (!check) { 
+    const erro = { status: 400, message: '"categoryIds" not found' };
+      throw erro; 
+    }
+   await PostCategory.bulkCreate([
+    { postId, categoryId: categoryIds[0] }, { postId, categoryId: categoryIds[1] }]);
+    return result; 
+  };
+
 const updateById = async (id, title, content, users) => {
   if (!title || !content) {
-    const erro = { status: 400, message: 'Some required fields are missing' }; throw erro;
+    throw missing;
   }
   const result = await BlogPost.findByPk(id);
 
@@ -91,4 +113,5 @@ module.exports = {
   updateById,
   deleteById,
   getSearch,
+  add,
 };

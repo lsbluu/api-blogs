@@ -6,6 +6,7 @@ const {
   updateByIdBlogPost, 
   deleteBlogPost, 
   getSearchBlog,
+  createBlog,
 } = require('./controllers/blogPostController');
 const { createCategory, getCategory } = require('./controllers/categoryController');
 
@@ -29,6 +30,8 @@ app.delete('/user/me', middlewares.authMiddleware, deleteMe);
 app.post('/categories', middlewares.authMiddleware, middlewares.validateName, createCategory);
 app.get('/categories', middlewares.authMiddleware, getCategory);
 app.get('/post', middlewares.authMiddleware, getBlogPost);
+app.post('/post', middlewares.authMiddleware, createBlog);
+
 app.get('/post/search', middlewares.authMiddleware, getSearchBlog);
 app.get('/post/:id', middlewares.authMiddleware, getByIdBlogPost);
 app.put('/post/:id', middlewares.authMiddleware, updateByIdBlogPost);

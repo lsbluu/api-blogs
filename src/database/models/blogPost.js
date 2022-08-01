@@ -27,10 +27,12 @@ module.exports = (sequelize, DataTypes) => {
     published: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
     updated: {
       allowNull: false,
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
     },
   },{timestamps:false});
 BlogPost.associate = (models) => {

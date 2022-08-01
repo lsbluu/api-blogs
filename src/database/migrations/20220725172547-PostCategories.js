@@ -12,7 +12,6 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        primaryKey: true,
       },
       categoryId:{
         type: Sequelize.INTEGER,

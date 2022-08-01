@@ -4,18 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'BlogPosts',
+      model: 'BlogPost',
       key: 'id',
     },
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
-    primaryKey: true,
   },
   categoryId:{
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'Categories',
+      model: 'Category',
       key: 'id',
     },
     onUpdate: 'CASCADE',
