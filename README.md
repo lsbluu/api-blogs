@@ -17,7 +17,7 @@
 
 <br />
 
-</details>
+<details>
  <summary><strong>.ENV</strong></summary>
   > 👉 `.env.example`
   ```env
@@ -41,5 +41,5 @@
   Esta variável de ambiente deverá ser utilizada tanto para criar o token quanto para verificá-lo. Os teste locais e o avaliador vão utilizar a variável de ambiente `JWT_SECRET` para testar os requisitos
 
   **:warning:️ Variáveis de ambiente além das especificadas acima não são suportadas, pois não são esperadas pelo avaliador do projeto.**
-
+</details>
 <br />
